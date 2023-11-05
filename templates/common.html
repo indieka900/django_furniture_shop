@@ -24,7 +24,7 @@
 		<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
 
 			<div class="container">
-				<a class="navbar-brand" href="{% url 'myapp:home' %}">Furni<span>.</span></a>
+				<a class="navbar-brand" href="{% url 'myapp:home' %}">{{company.title}}<span>.</span></a>
 
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -32,24 +32,15 @@
 
 				<div class="collapse navbar-collapse" id="navbarsFurni">
 					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-						<li class="nav-item {% if nav == 'home'  %} active {% endif %}">
-							<a class="nav-link" href="{% url 'myapp:home' %}">Home</a>
-						</li>
-						<li class="nav-item {% if nav == 'shop'  %} active {% endif %}">
-                            <a class="nav-link" href="{% url 'myapp:shop' %}">Shop</a>
-                        </li>
-						<li class="nav-item {% if nav == 'about'  %} active {% endif %}">
-                            <a class="nav-link" href="{% url 'myapp:about' %}">About us</a>
-                        </li>
-						<li class="nav-item {% if nav == 'services'  %} active {% endif %}">
-                            <a class="nav-link" href="{% url 'myapp:services' %}">Services</a>
-                        </li>
-						<li class="nav-item {% if nav == 'blog'  %} active {% endif %}">
-                            <a class="nav-link" href="{% url 'myapp:blog' %}">Blog</a>
-                        </li>
-						<li class="nav-item {% if nav == 'contact'  %} active {% endif %}">
-                            <a class="nav-link" href="{% url 'myapp:contact' %}">Contact us</a>
-                        </li>
+						{% for k in pages %}
+								<li class="nav-item {% if nav == nav_lower %} active {% endif %}">
+									<a class="nav-link" href="/{% if k.page|lower == 'home' %}{% else %}{{k.page|lower}}/ {% endif %}">{{ k.page }}</a>
+								</li>
+							
+						{% endfor %}
+
+						
+						
 					</ul>
 
 					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
@@ -185,14 +176,15 @@
 
 				<div class="row g-5 mb-5">
 					<div class="col-lg-4">
-						<div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Furni<span>.</span></a></div>
-						<p class="mb-4">Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant</p>
+						<div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">{{company.title}}<span>.</span></a></div>
+						<p class="mb-4">{{company.description}}</p>
 
 						<ul class="list-unstyled custom-social">
-							<li><a href="#"><span class="fa fa-brands fa-facebook-f"></span></a></li>
-							<li><a href="#"><span class="fa fa-brands fa-twitter"></span></a></li>
-							<li><a href="#"><span class="fa fa-brands fa-instagram"></span></a></li>
-							<li><a href="#"><span class="fa fa-brands fa-linkedin"></span></a></li>
+							{% for j in media %}
+								<li><a href="{{j.link}}"><span class="fa fa-brands fa-{{j.name}}"></span></a></li>
+							{% endfor %}
+							
+							
 						</ul>
 					</div>
 
@@ -200,10 +192,12 @@
 						<div class="row links-wrap">
 							<div class="col-6 col-sm-6 col-md-3">
 								<ul class="list-unstyled">
-									<li><a href="#">About us</a></li>
-									<li><a href="#">Services</a></li>
-									<li><a href="#">Blog</a></li>
-									<li><a href="#">Contact us</a></li>
+									{% for j in pages %}
+									  {% if j.page != "Home" and j.page != "Shop" and j.page != "Cart" %}
+										<li><a href="/{{j.page|lower}}/">{{j.title}}</a></li>
+									  {% endif %}
+									{% endfor %}
+									
 								</ul>
 							</div>
 
