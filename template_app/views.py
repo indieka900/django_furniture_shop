@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Pages, Team, Company,Pages, Testimonials, Blog, ContactUs, Messages, ImageGrid, Services,Shop
 
 
@@ -22,7 +22,7 @@ def about(request):
     testmonials = Testimonials.objects.all().order_by('?')
     services = Services.objects.all().order_by('?')[:4]
     team = Team.objects.all()
-    page = Pages.objects.get(page='About us')
+    page = Pages.objects.get(page='About')
     context = {
         'nav':'about',
         'testmonials':testmonials,
@@ -33,10 +33,20 @@ def about(request):
     return render(request, 'about.html', context)
 
 def contact(request):
-    page = Pages.objects.get(page='Contact us')
+    page = Pages.objects.get(page='Contact')
+    contactus = ContactUs.objects.all()
+    if request.method == 'POST':
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        messages = Messages(first_name = fname, last_name= lname, email=email, message= message)
+        messages.save()
+        return redirect ('/')
     context = {
         'page':page,
-        'nav':'contact'
+        'nav':'contact',
+        'contactus': contactus,
     }
     return render(request, 'contact.html',context)
 
