@@ -5,6 +5,7 @@ from .models import Pages, Team, Company, Pages, Testimonials, Blog, ContactUs, 
 def common_data(pageName):
     return {
         'testmonials': Testimonials.objects.all().order_by('?'),
+        'products' : Shop.objects.all().order_by('?')[:3],
         'pages': Pages.objects.all(),
         'media': SocialMedia.objects.all(),
         'company' : Company.objects.last(),
@@ -13,11 +14,9 @@ def common_data(pageName):
     }
 
 def home(request):
-    products = Shop.objects.all().order_by('?')[:3]
     blog = Blog.objects.all().order_by('?')[:3]
     services = Services.objects.all().order_by('?')[:4]
     context = {
-        'products': products,
         'blogs': blog,
         'services': services,
         **common_data('Home'),
@@ -51,9 +50,11 @@ def contact(request):
     return render(request, 'contact.html', context)
 
 def blog(request):
-    
     blog = Blog.objects.all().order_by('?')
-    context = {'blogs':blog,**common_data('Blog'),}
+    context = {
+        'blogs':blog,
+        **common_data('Blog'),
+    }
     return render(request, 'blog.html', context)
 
 def cart(request):
@@ -64,10 +65,8 @@ def cart(request):
     return render(request, 'cart.html', context)
 
 def services(request):
-    products = Shop.objects.all().order_by('?')[:3]
     services = Services.objects.all().order_by('?')
     context = {
-        'products':products,
         'services':services,
         **common_data('Services'),
         
@@ -79,7 +78,7 @@ def shop(request):
     products1 = Shop.objects.all().order_by('?')
     context = {
         **common_data('Shop'),
-        'products':products,
+        'product_s':products,
         'products1':products1,
     }
     return render(request, 'shop.html', context)
