@@ -33,7 +33,7 @@
 				<div class="collapse navbar-collapse" id="navbarsFurni">
 					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
 						{% for k in pages %}
-							{% if k.page != "Cart" %}
+							{% if k.page != "Cart" and k.page != "View" %}
 								<li class="nav-item {% if nav == k.page|lower %} active {% endif %}">
 									<a class="nav-link" href="/{% if k.page|lower == 'home' %}{% else %}{{k.page|lower}}/ {% endif %}">{{ k.page }}</a>
 								</li>
@@ -194,7 +194,7 @@
 							<div class="col-6 col-sm-6 col-md-3">
 								<ul class="list-unstyled">
 									{% for j in pages %}
-									  {% if j.page != "Home" and j.page != "Shop" and j.page != "Cart" %}
+									  {% if j.page != "Home" and j.page != "Shop" and j.page != "Cart" and j.page != "View" %}
 										<li><a href="/{{j.page|lower}}/">{{j.title}}</a></li>
 									  {% endif %}
 									{% endfor %}

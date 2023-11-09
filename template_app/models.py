@@ -5,6 +5,7 @@ class Shop(models.Model):
     price = models.FloatField()
     description = models.TextField(max_length=500)
     image = models.ImageField(upload_to='furniture', default='profile.png')
+    date_posted = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.furniture_name

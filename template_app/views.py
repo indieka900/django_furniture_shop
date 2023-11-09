@@ -83,6 +83,9 @@ def shop(request):
     }
     return render(request, 'shop.html', context)
 
+def viewItem(request, id):
+    item = Shop.objects.get(id=id)
+    return render(request, 'view_item.html',{'item':item,**common_data('View')})
 
 def thankyou(request):
     return render(request, 'thankyou.html', {'nav': 'thankyou'})

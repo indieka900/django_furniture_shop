@@ -5,13 +5,15 @@
     <div class="row">
       <div class="col-md-8 offset-md-2">
         <div class="card">
-          <img src="{{ item.image }}" class="card-img-top" alt="{{ item.name }}">
+          <img src="/media/{{ item.image }}" class="card-img-top" alt="{{ item.name }}">
           <div class="card-body">
             <h5 class="card-title">{{ item.name }}</h5>
             <p class="card-subtitle text-muted">
-              Price: ${{ item.price }}
+              Price:  <b>${{ item.price }}</b>.
               <br>
-              Date Posted: {{ item.date_posted|date:"F d, Y" }}
+              Name: <b>{{ item.furniture_name}}</b>.
+              <br>
+              Date Posted: <b><i>{{ item.date_posted|timesince  }}</i></b> ago.
             </p>
             <p class="card-text">{{ item.description }}</p>
           </div>
