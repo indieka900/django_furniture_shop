@@ -18,8 +18,8 @@ def CheckOut(request, product_id):
         'invoice': uuid.uuid4(),
         'currency_code': 'USD',
         'notify_url': f"http://{host}{reverse('paypal-ipn')}",
-        'return_url': f"http://{host}{reverse('payment-success', kwargs = {'product_id': product.id})}",
-        'cancel_url': f"http://{host}{reverse('payment-failed', kwargs = {'product_id': product.id})}",
+        'return_url': f"http://{host}{reverse('myapp:payment-success', kwargs = {'product_id': product.id})}",
+        'cancel_url': f"http://{host}{reverse('myapp:payment-failed', kwargs = {'product_id': product.id})}",
     }
 
     paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
@@ -29,7 +29,7 @@ def CheckOut(request, product_id):
         'paypal': paypal_payment
     }
 
-    return render(request, 'checkout.html', context)
+    return render(request, 'view_item.html', context)
 
 def PaymentSuccessful(request, product_id):
 

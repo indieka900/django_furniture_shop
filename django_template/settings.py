@@ -129,5 +129,5 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-PAYPAL_RECIEVER_EMAIL = 'omuyakujoseph1@gmail.com'
+PAYPAL_RECEIVER_EMAIL = 'omuyakujoseph1@gmail.com'
 PAYPAL_TEST = True

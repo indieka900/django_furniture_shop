@@ -5,17 +5,18 @@
     <div class="row">
       <div class="col-md-8 offset-md-2">
         <div class="card">
-          <img src="/media/{{ item.image }}" class="card-img-top" alt="{{ item.name }}">
+          <img src="/media/{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
           <div class="card-body">
-            <h5 class="card-title">{{ item.name }}</h5>
+            <h5 class="card-title">{{ product.name }}</h5>
             <p class="card-subtitle text-muted">
-              Price:  <b>${{ item.price }}</b>.
+              Price:  <b>${{ product.price }}</b>.
               <br>
-              Name: <b>{{ item.furniture_name}}</b>.
+              Name: <b>{{ product.furniture_name}}</b>.
               <br>
-              Date Posted: <b><i>{{ item.date_posted|timesince  }}</i></b> ago.
+              Date Posted: <b><i>{{ product.date_posted|timesince  }}</i></b> ago.
             </p>
-            <p class="card-text">{{ item.description }}</p>
+            <p class="card-text">{{ product.description }}</p>
+            {{paypal.render}}
           </div>
         </div>
       </div>
